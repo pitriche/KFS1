@@ -22,7 +22,7 @@ $(kernel_iso): $(kernel_bin)
 
 # compile the kernel
 $(kernel_bin): $(obj_path) $(obj)
-	x86_64-elf-ld -n -o $(kernel_bin) -T linker.ld $(obj)
+	x86_64-elf-ld -m elf_i386 -n -o $(kernel_bin) -T linker.ld $(obj)
 
 # create build directory
 $(obj_path) :
@@ -30,7 +30,7 @@ $(obj_path) :
 
 # build object files
 obj/%.o : src/%.asm
-	nasm -f elf64 $< -o $@
+	nasm -f elf32 $< -o $@
 
 clean:
 	rm -rf $(obj_path)
